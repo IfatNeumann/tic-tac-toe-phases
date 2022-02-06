@@ -5,15 +5,15 @@ var selections = new Array();
 //[0,1,2]
 //[3,4,5]
 //[6,7,8]
-var win_patterns =  [
-	[1,1,1,0,0,0,0,0,0], // [0,1,2]
-	[0,0,0,1,1,1,0,0,0], // [3,4,5]
-	[0,0,0,0,0,0,1,1,1], // [6,7,8]
-	[1,0,0,1,0,0,1,0,0], // [0,3,6]
-	[0,1,0,0,1,0,0,1,0], // [1,4,7]
-	[0,0,1,0,0,1,0,0,1], // [2,5,8]
-	[1,0,0,0,1,0,0,0,1], // [0,4,8]
-	[0,0,1,0,1,0,1,0,0], // [2,4,6]
+var win_indexes =  [
+	[0,1,2],
+	[3,4,5],
+	[6,7,8],
+	[0,3,6],
+	[1,4,7],
+	[2,5,8],
+	[0,4,8],
+	[2,4,6]
 ];
 
 selections['X'] = [0,0,0,0,0,0,0,0,0];
@@ -66,21 +66,26 @@ function markCheck(obj){
 }
 
 function checkPlayerHasAnyWinningPattern() {
-	gameOver = false; //game is over if someone wins
+	gameOver = false;
+	player_selections = selections[turn];
+	for (var i=0; i < win_indexes.length; i++) {
 
-	for (var p=0; p < win_patterns.length; p++) {
-		if (gameOver != true) { 
-			gameOver = isContainingThisWinningPattern(selections[turn], win_patterns[p]);
+		first_win_index = win_indexes[i][0];
+		second_win_index = win_indexes[i][1];
+		third_win_index = win_indexes[i][2];
 
-			if ( gameOver === true ) {
-				
-				// On winning disabled all boxes
-				disableAllCells();
+		if(
+			player_selections[first_win_index] === 1 &&
+			player_selections[second_win_index] === 1 &&
+			player_selections[third_win_index] === 1
+		){
+			
+			// On winning disabled all boxes
+			disableAllCells();
 
-				alert('Player '+turn+' Won !!');
-				break;
-			} 
-		}
+			alert('Player '+turn+' Won !!');
+			break;
+		} 
 	}
 
 	// If no one wins; declare DRAW
@@ -88,22 +93,6 @@ function checkPlayerHasAnyWinningPattern() {
 		alert('Game Draw!');
 		gameOver = true;	
 	}
-}
-
-// Verifying player's selections with a specific winning pattern
-function isContainingThisWinningPattern(player_selections, win_pattern){
-	var match = 0;
-	for (var i=0; i < 9; i++) {
-		if(player_selections[i] + win_pattern[i] == 2){
-			match ++;
-		}
-	}
-
-	if (match == 3){
-		return true;
-	}
-
-	return false;
 }
 
 function disableAllCells() {
