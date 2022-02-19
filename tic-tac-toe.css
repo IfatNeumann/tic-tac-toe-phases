@@ -36,3 +36,11 @@ body {
     background-color: red;
     color: #FFF;
 }
+
+.score-card {
+	font-weight: bold;
+	line-height: 25px;
+}
+.score-card span {
+	font-weight: normal;
+}

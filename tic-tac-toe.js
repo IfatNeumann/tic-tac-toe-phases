@@ -1,7 +1,9 @@
 var turn = 'X';
 var total_turns_played = 0;
 var selections = new Array();
-
+var scores = new Array(); 
+	scores['X'] = 0;
+	scores['O'] = 0;
 //[0,1,2]
 //[3,4,5]
 //[6,7,8]
@@ -84,6 +86,8 @@ function checkPlayerHasAnyWinningPattern(player) {
 			disableAllCells();
 			setTimeout(function(){
 				alert('Player '+player+' Won !!'); 
+				// Updating score card
+				scoreUpdate(player);
 		   }, 1);
 			break;
 		} 
@@ -104,4 +108,20 @@ function disableAllCells() {
 	for (var i = 0; i < elements.length; i++) {
 	  elements[i].disabled =true;
 	}
+}
+
+// Update the players' score
+function scoreUpdate(turn){
+	scores[turn]++;
+	document.getElementById('score-'+turn).innerHTML = scores[turn];
 } 
+
+function restartGame(){
+	if(scores['X'] == 0 && scores['X'] == 0){
+		alert("Nothing to restart!")
+	}
+	scores['X'] = 0;
+	document.getElementById('score-X').innerHTML = 0;
+	scores['O'] = 0;
+	document.getElementById('score-O').innerHTML = 0;
+}

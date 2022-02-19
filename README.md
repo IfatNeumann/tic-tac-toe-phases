@@ -10,3 +10,7 @@ Each commit is a phase in the build of the game, and each phase has demo link.
 [Phase 3](https://tic-tac-toe-phase-3.netlify.app/): In phase 3, X's and O's moves are checked with the possible winning patterns. In this phase we declare win or draw, but the score isn't saved.
 
 I also added a favicon.
+
+[Phase 4](https://tic-tac-toe-phase-4.netlify.app/): In phase 4, X's and O's scores are saved and can be initialized with the restart button.
+
+Also, I fixed the bug where the alert appeared before the last move

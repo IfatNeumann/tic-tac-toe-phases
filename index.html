@@ -9,18 +9,24 @@
 <body>
 
 <div class="game-area">
-	<h1>Welcome to Tic-Tac-Toe Phase 3!</h1>
-	<p>In phase 3, X's and O's moves are checked with the possible winning patterns. 
+	<h1>Welcome to Tic-Tac-Toe Phase 4!</h1>
+	<p>In phase 4, X's and O's scores are saved and can be initialized with the restart button.
 		<br>
-		In this phase we declare <b>win</b> or <b>draw</b>, but the score isn't saved.
+		Also, I fixed the bug where the alert appeared before the last move
 	</p>
 	<input type="submit" value="Start Game" onclick="generateGame()">
+	<input type="submit" value="Restart Game" onclick="restartGame()">
 
 	<div id="game-board" class="game-board"></div>
 	<p> Just a reminder: </p>
 	<p> [0,1,2] <br>
 		[3,4,5] <br>
 		[6,7,8] </p>
+
+	<div class="score-card">
+		Player X Score: <span id="score-X">0</span> <br>
+		Player O Score: <span id="score-O">0</span>
+	</div>
 
 </div>
 </body>
