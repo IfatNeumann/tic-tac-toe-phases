@@ -52,7 +52,7 @@ function markCheck(obj){
 	var cell = Number(obj.id);
 	selections[turn][cell] = 1;
 	total_turns_played++;
-	checkPlayerHasAnyWinningPattern();
+	checkPlayerHasAnyWinningPattern(turn);
 
 	if (turn == 'X' ) {
 		obj.setAttribute("class", 'green-player');
@@ -65,9 +65,9 @@ function markCheck(obj){
 	obj.setAttribute("disabled", 'disabled');
 }
 
-function checkPlayerHasAnyWinningPattern() {
+function checkPlayerHasAnyWinningPattern(player) {
 	gameOver = false;
-	player_selections = selections[turn];
+	player_selections = selections[player];
 	for (var i=0; i < win_indexes.length; i++) {
 
 		first_win_index = win_indexes[i][0];
@@ -82,15 +82,18 @@ function checkPlayerHasAnyWinningPattern() {
 			
 			// On winning disabled all boxes
 			disableAllCells();
-
-			alert('Player '+turn+' Won !!');
+			setTimeout(function(){
+				alert('Player '+player+' Won !!'); 
+		   }, 1);
 			break;
 		} 
 	}
 
 	// If no one wins; declare DRAW
 	if (total_turns_played == 9 && gameOver === false){
-		alert('Game Draw!');
+		setTimeout(function(){
+			alert('Game Draw!');
+   		}, 1);
 		gameOver = true;	
 	}
 }
