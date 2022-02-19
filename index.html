@@ -9,19 +9,16 @@
 <body>
 
 <div class="game-area">
-	<h1>Welcome to Tic-Tac-Toe Phase 4!</h1>
-	<p>In phase 4, X's and O's scores are saved and can be initialized with the restart button.
+	<h1>Welcome to Tic-Tac-Toe Phase 5!</h1>
+	<p>In phase 5, I added the option for O to be an auto player.
 		<br>
-		Also, I fixed the bug where the alert appeared before the last move
+		Also, I fixed the bug where a player winning when the board is full lead to 2 alerts - win and draw.
 	</p>
 	<input type="submit" value="Start Game" onclick="generateGame()">
 	<input type="submit" value="Restart Game" onclick="restartGame()">
+	<input type="checkbox" name="with_computer" checked="true" id="with_computer"> With Computer? <br/>
 
 	<div id="game-board" class="game-board"></div>
-	<p> Just a reminder: </p>
-	<p> [0,1,2] <br>
-		[3,4,5] <br>
-		[6,7,8] </p>
 
 	<div class="score-card">
 		Player X Score: <span id="score-X">0</span> <br>

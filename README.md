@@ -14,3 +14,7 @@ I also added a favicon.
 [Phase 4](https://tic-tac-toe-phase-4.netlify.app/): In phase 4, X's and O's scores are saved and can be initialized with the restart button.
 
 Also, I fixed the bug where the alert appeared before the last move
+
+[Phase 5](https://tic-tac-toe-phase-5.netlify.app/): In phase 5, I added the option for O to be an auto player.
+
+Also, I fixed the bug where a player winning when the board is full lead to 2 alerts - win and draw.

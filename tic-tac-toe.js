@@ -21,6 +21,9 @@ var win_indexes =  [
 selections['X'] = [0,0,0,0,0,0,0,0,0];
 selections['O'] = [0,0,0,0,0,0,0,0,0];
 
+var with_computer = true;
+var optional_selections_for_computer = [0,0,0,0,0,0,0,0,0];
+
 function generateGame(){
 
 	// Clearing board for new game
@@ -28,7 +31,15 @@ function generateGame(){
 	selections['X'] = [0,0,0,0,0,0,0,0,0];
 	selections['O'] = [0,0,0,0,0,0,0,0,0];
 	total_turns_played = 0;
+	turn = 'X'
 	var unique_id = 0;
+	
+
+	// is auto player selected 
+	auto_player = document.getElementById('with_computer');
+	optional_selections_for_computer = [0,0,0,0,0,0,0,0,0]; 
+	if (auto_player.checked === true) with_computer = true; 
+	else  with_computer = false;
 	
 	// Generating board
 	for (row=0; row<3; row++){
@@ -53,12 +64,19 @@ function markCheck(obj){
 	obj.value = turn;
 	var cell = Number(obj.id);
 	selections[turn][cell] = 1;
+	optional_selections_for_computer[cell] = 1;
 	total_turns_played++;
 	checkPlayerHasAnyWinningPattern(turn);
 
 	if (turn == 'X' ) {
 		obj.setAttribute("class", 'green-player');
 		turn = 'O';
+		// if auto player selected
+		if (with_computer===true) {
+			setTimeout(function(){
+				autoTurn();
+			}, 100);
+		}
 	} else {
 		obj.setAttribute("class", 'red-player');
 		turn = 'X';
@@ -81,7 +99,7 @@ function checkPlayerHasAnyWinningPattern(player) {
 			player_selections[second_win_index] === 1 &&
 			player_selections[third_win_index] === 1
 		){
-			
+			gameOver = true;
 			// On winning disabled all boxes
 			disableAllCells();
 			setTimeout(function(){
@@ -124,4 +142,20 @@ function restartGame(){
 	document.getElementById('score-X').innerHTML = 0;
 	scores['O'] = 0;
 	document.getElementById('score-O').innerHTML = 0;
+}
+
+function autoTurn() {
+	available_cells = []
+
+	// find available indexes
+	for(var i=0; i< optional_selections_for_computer.length; i++){
+		if (optional_selections_for_computer[i] == 0){
+			available_cells.push(i);
+		} 
+	}
+
+	// choose randomly where to mark check
+	var chosen_cell = available_cells[Math.floor(Math.random() * available_cells.length)];//8
+	var desired_obj = document.getElementById(chosen_cell);
+	if(!desired_obj.disabled) markCheck(desired_obj);
 }
